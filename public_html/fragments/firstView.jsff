@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBox text="First Flow" id="pb1">
+    <f:facet name="toolbar"/>
+    <af:inputText label="Text" id="it1" value="#{bindings.textVarAttr.inputValue}" autoSubmit="true"/>
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:toolbar id="t1">
+      <af:button text="Set Page Flow Scope - pageFlowScope.helloText" id="b1">
+        <af:setPropertyListener from="#{bindings.textVarAttr.inputValue}" to="#{pageFlowScope.helloText}" type="action"/>
+      </af:button>
+      <af:button text="Navigate" id="b2" action="toSecond" rendered="#{pageFlowScope.backRendered != 'back'}"/>
+      <af:button text="Back" id="b3" action="back" rendered="#{pageFlowScope.backRendered == 'back'}"/>
+      <af:spacer width="10" height="10" id="s1"/>
+      <af:outputText value="#{pageFlowScope.helloText}" id="ot1" partialTriggers="b1"/>
+    </af:toolbar>
+  </af:panelBox>
+</ui:composition>

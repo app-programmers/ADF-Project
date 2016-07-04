@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="second-flow">
+    <default-activity>secondView</default-activity>
+    <view id="secondView">
+      <page>/fragments/secondView.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn">
+      <outcome>
+        <name>taskFlowReturn</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="first-flow">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/first-flow.xml</document>
+        <id>first-flow</id>
+      </task-flow-reference>
+      <input-parameter id="__11">
+        <name>backRendered</name>
+        <value>#{'back'}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>secondView</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>next</from-outcome>
+        <to-activity-id>first-flow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>first-flow</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>taskFlowReturn</from-outcome>
+        <to-activity-id>secondView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
